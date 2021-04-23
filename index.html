@@ -1,0 +1,100 @@
+<!--
+	Created by Christopher Beeston - 2021
+-->
+
+<!DOCTYPE html>
+<html ng-app="final">
+	
+	<head>
+		<script data-require="angular.js@1.4.x" src="https://code.angularjs.org/1.4.12/angular.js" data-semver="1.4.9"></script>
+		<script src="script.js"></script>
+		<link rel="stylesheet" href="style.css">
+		<title>Spot the Phish</title>
+	</head>
+
+	<body ng-controller="MainCtrl">
+		<div class="pop-up" ng-show="showHint">
+			<p class="cross">
+				<span class="cross-click" ng-click="closeHelp()">X</span>
+			</p>
+			<p class="hint-text">
+			<img src="{{levels[current].worddef}}" style=" height:40vh"/>
+			</p>
+		</div>
+		<div class="{{tint}}">
+			<div id="main-body">
+				<div id="container">
+					<h1>
+						spot the phish
+					</h1>
+					<div id="menu" ng-show="show_menu">
+						<p>
+							<span class="button" ng-click="playGame()">play</span>
+							<br>
+							<span class="button" ng-click="showHow()">how to play?</span>
+							<br>
+							<span class="button" ng-click="showAbout()">about</span>
+						</p>
+					</div>
+					<div id="menu" ng-show="show_end">
+						<p>
+							<p style="font-size:2.6vh;">You got <strong>{{points}}</strong> points.</p>
+							<strong>{{end_text}}</strong>
+							<br>
+							{{end_text2}}
+							<p>
+							<span class="button toMenu" ng-click="toMenu()">go back to menu</span>
+							</p>
+						</p>
+					</div>
+					<div id="menu" ng-show="show_howtoplay">
+						<p>
+							<p>Answer each question.</p>
+							If you are unsure, click the <span class="special-word" ng-click="displayHelp()">underlined text</span> for help.
+							<p>
+							<span class="button toMenu" ng-click="toMenu()">go back to menu</span>
+							</p>
+						</p>
+					</div>
+					<div id="menu" ng-show="show_about">
+							<p>
+								<p>
+									Created by Christopher Beeston
+								</p>
+
+							<p>
+							<span class="button toMenu" ng-click="toMenu()">go back to menu</span>
+							</p>
+						</p>
+					</div>
+						<div id="game" ng-show="show_game">
+							<p id="question">
+								{{levels[current].nameP1}}<span class="special-word" ng-click="displayHelp()">{{levels[current].topic}}</span>{{levels[current].nameP2}}
+							</p>
+							
+							<div class="display-img" ng-click="getResult(0, levels[current].correct, levels[current].num)" title="{{levels[current].titleLeft}}">
+								<p class="middle-box">
+									<span class="middle-text">
+										{{levels[current].left}}
+									</span>
+								</p>
+							</div>
+							<div class="display-img" ng-click="getResult(1, levels[current].correct, levels[current].num)" title="{{levels[current].titleRight}}">
+								<p class="middle-box">
+									<span class="middle-text">
+										{{levels[current].right}}
+									</span>
+								</p>
+							</div>
+
+							<p id="points">
+								Points: {{points}}
+							</p>
+
+						</div>
+					</div>
+			</div>
+		</div>
+	</body>
+
+</html>
